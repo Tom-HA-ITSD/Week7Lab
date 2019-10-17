@@ -87,13 +87,13 @@
                 <td>${user.lname}</td>
                 <td>${user.role.roleName}</td>
                 <td class="text-center">
-                  <a href="/users?action=edit&email=${user.email}" 
+                  <a href="/users?action=edit&email=${user.email}"
                      class="row-btn">
                     <i class="text-secondary fas fa-pencil-alt"></i>
                   </a>
                 </td>
                 <td class="text-center">
-                  <a href="/users?action=delete&email=${user.email}" 
+                  <a href="/users?action=delete&email=${user.email}" >
                      <i class="text-danger fas fa-times" ></i>
                   </a>
                 </td>

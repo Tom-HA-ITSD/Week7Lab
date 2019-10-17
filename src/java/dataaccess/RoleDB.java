@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import models.Role;
+import java.util.List;
 import models.User;
 
 /**
@@ -42,4 +44,30 @@ public class RoleDB {
         }
     }
 
+    public List<Role> getAll() throws SQLException {
+        ConnectionPool connectionPool = null;
+        Connection connection = null;
+        try {
+            connectionPool = ConnectionPool.getInstance();
+            connection = connectionPool.getConnection();
+            Role role;
+            ArrayList<Role> roles = new ArrayList<>();
+            
+            String preparedQuery = "SELECT RoleID, RoleName FROM role_table";
+            PreparedStatement ps = connection.prepareStatement(preparedQuery);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int RoleID = rs.getInt(1);
+                String RoleName = rs.getString(2);
+                        
+                role = new Role(RoleID, RoleName);
+                roles.add(role);
+            }
+
+            return roles;
+        } finally {
+            connectionPool.freeConnection(connection);
+        }
+    }
 }
