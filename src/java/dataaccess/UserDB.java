@@ -28,11 +28,7 @@ public class UserDB {
         try {
             connectionPool = ConnectionPool.getInstance();
             connection = connectionPool.getConnection();
-            String preparedQuery
-                    = "INSERT INTO User_Table "
-                    + "(email, fname, lname, password) "
-                    + "VALUES "
-                    + "(?, ?, ?, ?)";
+            String preparedQuery = "INSERT INTO user_table (email, fname, lname, password, role) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement ps = connection.prepareStatement(preparedQuery);
 
@@ -40,6 +36,7 @@ public class UserDB {
             ps.setString(2, user.getFname());
             ps.setString(3, user.getLname());
             ps.setString(4, user.getPassword());
+            ps.setInt(5, user.getRole().getRoleID());
 
             rows = ps.executeUpdate();
             ps.close();
@@ -63,7 +60,7 @@ public class UserDB {
             connectionPool = ConnectionPool.getInstance();
             connection = connectionPool.getConnection();
 
-            String preparedQuery = "UPDATE User_Table set active=?, fname=?, lname=?, password=? where email=?";
+            String preparedQuery = "UPDATE user_table SET active=?, fname=?, lname=?, password=?, role=? WHERE email=?";
             int successCount = 0;
 
             PreparedStatement statement = connection.prepareStatement(preparedQuery);
@@ -72,6 +69,7 @@ public class UserDB {
             statement.setString(3, user.getLname());
             statement.setString(4, user.getEmail());
             statement.setString(5, user.getPassword());
+            statement.setInt(6, user.getRole().getRoleID());
 
             successCount = statement.executeUpdate();
             statement.close();
@@ -182,7 +180,7 @@ public class UserDB {
             connectionPool = ConnectionPool.getInstance();
             connection = connectionPool.getConnection();
 
-            String DELETE_STMT = "DELETE FROM User_Table where email = ?";
+            String DELETE_STMT = "DELETE FROM user_table where email = ?";
             PreparedStatement prepare = connection.prepareStatement(DELETE_STMT);
             prepare.setString(1, user.getEmail());
 

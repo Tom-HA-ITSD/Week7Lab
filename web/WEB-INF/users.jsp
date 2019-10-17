@@ -74,7 +74,7 @@
               <th>Email</th>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Role Name</th>
+              <th>Role</th>
               <th class="text-center">Edit</th>
               <th class="text-center">Delete</th>
             </tr>
