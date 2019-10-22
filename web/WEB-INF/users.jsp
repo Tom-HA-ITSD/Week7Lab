@@ -67,14 +67,7 @@
             name="roleID"
             required>
                 <c:forEach items="${roles}" var="role">
-                    <c:choose>
-                        <c:when test="${role.roleID == 2}">
-                            <option value="${role.roleID}" selected>${role.roleName}</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${role.roleID}">${role.roleName}</option>
-                        </c:otherwise>
-                    </c:choose>
+                    <option value="${role.roleID}">${role.roleName}</option>
                 </c:forEach>
           </select>
           <input type="hidden" name="action" value="add" />

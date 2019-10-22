@@ -24,6 +24,7 @@ public class UserServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
+    RoleService rs = new RoleService();
     UserService us = new UserService();
 
     String email = request.getParameter("email");
@@ -67,6 +68,7 @@ public class UserServlet extends HttpServlet {
     }
 
     try {
+      request.setAttribute("roles", rs.getAll());
       request.setAttribute("users", us.getAll());
     } catch (Exception e) {
       request.setAttribute("error", e.getMessage());
@@ -121,8 +123,8 @@ public class UserServlet extends HttpServlet {
     }
 
     try {
+      request.setAttribute("roles", rs.getAll());
       request.setAttribute("users", us.getAll());
-      request.setAttribute("roles", us.getAll());
     } catch (Exception ex) {
       request.setAttribute("error", ex.getMessage());
     }
