@@ -6,6 +6,13 @@ import java.util.List;
 import models.Role;
 
 public class RoleService {
+    
+    public Role getRole(int roleID) throws Exception {
+        RoleDB db = new RoleDB();
+        Role role = db.getRole(roleID);
+        return role;
+    }
+    
     public List<Role> getAll() throws Exception {
         RoleDB db = new RoleDB();
         ArrayList<Role> roleList = (ArrayList<Role>) db.getAll();

@@ -6,7 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Role;
 import models.User;
+import services.RoleService;
 import services.UserService;
 
 public class UserServlet extends HttpServlet {
@@ -85,11 +87,14 @@ public class UserServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     UserService us = new UserService();
+    RoleService rs = new RoleService();
 
     String email = request.getParameter("email");
     String fname = request.getParameter("fname");
     String lname = request.getParameter("lname");
     String password = request.getParameter("password");
+    String roleIDStr = request.getParameter("roleID");
+    int roleID = Integer.parseInt(roleIDStr);
 
     String action = request.getParameter("action");
     action = action == null ? "" : action;
@@ -97,14 +102,16 @@ public class UserServlet extends HttpServlet {
     try {
       switch (action) {
         case "add":
-          if (checkIsValid(new String[]{email, fname, lname, password})) {
-            us.insert(email, fname, lname, password);
+          if (checkIsValid(new String[]{email, fname, lname, password, roleIDStr})) {
+            Role role = rs.getRole(roleID);
+            us.insert(email, fname, lname, password, role);
           } else {
             request.setAttribute("error", "All fields are required");
           }
         case "edit":
-          if (checkIsValid(new String[]{email, fname, lname})) {
-            us.update(email, fname, lname, password);
+          if (checkIsValid(new String[]{email, fname, lname, password, roleIDStr})) {
+            Role role = rs.getRole(roleID);
+            us.update(email, fname, lname, password, role);
           } else {
             request.setAttribute("error", "All fields are required");
           }
@@ -115,6 +122,7 @@ public class UserServlet extends HttpServlet {
 
     try {
       request.setAttribute("users", us.getAll());
+      request.setAttribute("roles", us.getAll());
     } catch (Exception ex) {
       request.setAttribute("error", ex.getMessage());
     }

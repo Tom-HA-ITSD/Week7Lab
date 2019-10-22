@@ -61,6 +61,22 @@
             placeholder="Password"
             required
             />
+          <select
+            class="input-dark"
+            type="drop" 
+            name="roleID"
+            required>
+                <c:forEach items="${roles}" var="role">
+                    <c:choose>
+                        <c:when test="${role.roleID == 2}">
+                            <option value="${role.roleID}" selected>${role.roleName}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${role.roleID}">${role.roleName}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+          </select>
           <input type="hidden" name="action" value="add" />
           <input class="input-primary" type="submit" value="Save"/>
         </form>
@@ -143,6 +159,22 @@
             value="${user.password}"
             placeholder="Password"
             />
+            <select
+            class="input-dark"
+            type="drop" 
+            name="roleID"
+            required>
+                <c:forEach items="${roles}" var="role">
+                    <c:choose>
+                        <c:when test="${role.roleID == user.role.roleID}">
+                            <option value="${role.roleID}" selected>${role.roleName}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${role.roleID}">${role.roleName}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </select>
             <input type="hidden" name="action" value="edit" />
             <input class="mb-0 input-primary" type="submit" value="Save"/>
             <a href="/users?action=clearEdit">

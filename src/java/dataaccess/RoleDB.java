@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Role;
 import java.util.List;
-import models.User;
 
 /**
  *

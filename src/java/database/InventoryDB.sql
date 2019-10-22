@@ -9,9 +9,9 @@ CREATE TABLE `role_table` (
   PRIMARY KEY (`RoleID`)
 );
 
-INSERT INTO `role_table` VALUES (1, 'system admin');
-INSERT INTO `role_table` VALUES (2, 'regular user');
-INSERT INTO `role_table` VALUES (3, 'company admin');
+INSERT INTO `role_table` VALUES (1, 'System Admin');
+INSERT INTO `role_table` VALUES (2, 'Regular User');
+INSERT INTO `role_table` VALUES (3, 'Company Admin');
 
 
 CREATE TABLE if not exists user_table (

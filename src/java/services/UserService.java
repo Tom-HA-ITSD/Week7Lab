@@ -4,6 +4,7 @@ import models.User;
 import java.util.List;
 import dataaccess.UserDB;
 import java.util.ArrayList;
+import models.Role;
 
 /**
  * 
@@ -45,13 +46,17 @@ public class UserService {
 
     /**
      * @Author David and Ayden With leadership from Ember
-     * @param user
+     * @param email
+     * @param fname
+     * @param lname
+     * @param password
+     * @param role
      * @return
      * @throws Exception 
      */
-    public int update(String email, String fname, String lname, String password) throws Exception {
+    public int update(String email, String fname, String lname, String password, Role role) throws Exception {
         UserDB db = new UserDB();
-        User user = new User(email, fname, lname, password, null);
+        User user = new User(email, fname, lname, password, role);
         int i = db.update(user);
         return i;
     }
@@ -72,15 +77,19 @@ public class UserService {
         return i;
     }
 
-     /**
+    /**
      * @Author David and Ayden With leadership from Ember
-     * @param user the user to update
-     * @return the int from UserDb
-     * @throws Exception - all exceptions that could be had.
+     * @param email
+     * @param fname
+     * @param lname
+     * @param password
+     * @param role
+     * @return
+     * @throws Exception 
      */
-    public int insert(String email, String fname, String lname, String password) throws Exception {
+    public int insert(String email, String fname, String lname, String password, Role role) throws Exception {
         UserDB db = new UserDB();
-        User user = new User(email, fname, lname, password, null);
+        User user = new User(email, fname, lname, password, role);
         int i = db.insert(user);
         return i;
     }
