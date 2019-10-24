@@ -67,9 +67,9 @@ public class UserDB {
             statement.setBoolean(1, user.isActive());
             statement.setString(2, user.getFname());
             statement.setString(3, user.getLname());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPassword());
-            statement.setInt(6, user.getRole().getRoleID());
+            statement.setString(4, user.getPassword());
+            statement.setInt(5, user.getRole().getRoleID());
+            statement.setString(6, user.getEmail());
 
             successCount = statement.executeUpdate();
             statement.close();
